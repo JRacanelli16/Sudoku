@@ -1,15 +1,13 @@
 
 # Sudoku Web App (Flask)
 
-Este é um aplicativo web de Sudoku feito com Python (Flask) que permite:
+Este é um aplicativo web de Sudoku feito com Python (Flask) com as funções de: 
 
 - Inserção manual interativa de números
 - Geração de Sudoku com níveis de dificuldade (Fácil, Médio, Difícil)
 - Visualização da solução
 - Botão para gerar outro tabuleiro da mesma dificuldade
 - Interface amigável via navegador
-
-## ✅ Como rodar
 
 ### 1. Instale o Flask
 
@@ -33,7 +31,7 @@ Abra o navegador em:
 http://localhost:5000
 ```
 
-## 📁 Estrutura
+## Estrutura de pasta
 
 ```
 sudoku_web/
@@ -46,10 +44,4 @@ sudoku_web/
 │   └── style.css
 ```
 
-## 💡 Observações
 
-- A inserção manual agora usa linha e coluna de 1 a 9.
-- Há um botão "Gerar Outro" ao lado de "Ver Solução".
-- Botões na página inicial estão alinhados horizontalmente.
-
-Feito com ❤️ usando Python + Flask.
