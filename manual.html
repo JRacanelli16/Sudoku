@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sudoku Manual</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Inserção Manual</h1>
+
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form action="/add_number" method="POST">
+      <label for="row">Linha (1-9):</label>
+      <input type="number" name="row" min="1" max="9" required>
+      <label for="col">Coluna (1-9):</label>
+      <input type="number" name="col" min="1" max="9" required>
+      <label for="value">Valor (1-9):</label>
+      <input type="number" name="value" min="1" max="9" required>
+      <button type="submit">Adicionar Número</button>
+    </form>
+
+    <div class="grid">
+      {% for i in range(9) %}
+        {% for j in range(9) %}
+          <div class="cell {% if (i+1) % 3 == 0 and i != 8 %} bottom-line {% endif %}{% if (j+1) % 3 == 0 and j != 8 %} right-line {% endif %}">
+            {{ board[i][j] if board[i][j] != 0 else '' }}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+    <form action="/solve_manual" method="GET">
+      <button type="submit">Resolver Sudoku</button>
+    </form>
+
+    <form action="/reset" method="GET">
+      <button type="submit">Voltar à Página Inicial</button>
+    </form>
+  </div>
+</body>
+</html>
