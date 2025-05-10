@@ -1,5 +1,5 @@
 
-# Sudoku Web App (Flask)
+# Sudoku 
 
 Este é um aplicativo web de Sudoku feito com Python (Flask) com as funções de: 
 
