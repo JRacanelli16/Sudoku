@@ -1,8 +1,11 @@
+
+
+
 # Sudoku Web (Flask) 
 
 Aplicação web simples, feita em **Python + Flask**, que permite:
 
-- ✅ **Gerar** um Sudoku (nível único, entre 40 e 50 casas vazias)  
+- ✅ **Gerar** um Sudoku com **4 níveis de dificuldade**  
 - ✅ **Inserir números manualmente** em um tabuleiro em branco  
 - ✅ **Resolver** qualquer tabuleiro válido e exibir **até 10 soluções**  
 - ✅ Mostrar **estatísticas** de busca (tentativas e tempo em ms)  
@@ -17,26 +20,36 @@ Aplicação web simples, feita em **Python + Flask**, que permite:
 | Ferramenta | Versão Sugerida |
 |------------|-----------------|
 | Python     | 3.9 +           |
-| Flask      | \>= 2.0         |
+| Flask      | ≥ 2.0           |
 
 Instalação rápida:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt   # ou simplesmente: pip install flask
+````
+
+---
 
 ## 2. Como executar
 
+```bash
 # modo 1 — diretamente
 python appsudoku.py
 
 # modo 2 — usando FLASK_APP
-export FLASK_APP=appsudoku.py      # no Windows: set FLASK_APP=appsudoku.py
+export FLASK_APP=appsudoku.py      # Windows: set FLASK_APP=appsudoku.py
 flask run
+```
+
+Abra o navegador em **[http://localhost:5000](http://localhost:5000)**.
+
+---
 
 ## 3. Estrutura do Projeto
 
+```
 SUDOKU/
 ├── static/
 │   └── style.css        # estilos do tabuleiro e botões
@@ -47,6 +60,9 @@ SUDOKU/
 ├── appsudoku.py         # servidor Flask + lógica de geração/solução
 ├── README.md            # este arquivo
 └── requirements.txt
+```
+
+---
 
 ## 4. API Interna
 
@@ -62,6 +78,10 @@ Principais rotas Flask:
 | `/add`          | POST   | Adiciona número (linha, coluna, valor) |
 | `/solve_manual` | GET    | Resolve tabuleiro inserido             |
 
-Contribuições são bem-vindas! Abra um issue ou faça um pull request.
+Contribuições são bem-vindas! Abra um *issue* ou faça um *pull request*.
 Enois
+
+```
+```
+
 
