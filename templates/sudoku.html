@@ -2,49 +2,69 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Sudoku Gerado</title>
+  <title>Sudoku Interativo</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Sudoku</h1>
-    <div class="grid">
-      {% for i in range(9) %}
-        {% for j in range(9) %}
-          <div class="cell {% if (i+1) % 3 == 0 and i != 8 %} bottom-line {% endif %}{% if (j+1) % 3 == 0 and j != 8 %} right-line {% endif %}">
-            {{ board[i][j] if board[i][j] != 0 else '' }}
-          </div>
-        {% endfor %}
-      {% endfor %}
-    </div>
+    <h1>Resolva o Sudoku</h1>
 
-    {% if not show_solution %}
-    <form action="/solve" method="POST" style="display:inline-block;">
-      <input type="hidden" name="solved_board" value="{{ solved }}">
-      <button type="submit">Ver Solução</button>
-    </form>
-    <form action="/generate" method="POST" style="display:inline-block;">
-      <input type="hidden" name="difficulty" value="{{ difficulty }}">
-      <button type="submit">Gerar Outro</button>
-    </form>
+    {% if error %}
+      <p style="color:red;">{{ error }}</p>
     {% endif %}
 
-    <form action="/reset" method="GET" style="margin-top: 20px;">
-      <button type="submit">Voltar à Página Inicial</button>
-    </form>
 
-    {% if show_solution %}
-      <h2>Solução:</h2>
-      <div class="grid">
-        {% for i in range(9) %}
-          {% for j in range(9) %}
-            <div class="cell {% if (i+1) % 3 == 0 and i != 8 %} bottom-line {% endif %}{% if (j+1) % 3 == 0 and j != 8 %} right-line {% endif %}">
-              {{ solved[i][j] }}
-            </div>
+    <div class="sudoku-layout">
+      <div class="sudoku-board">
+        <div class="grid">
+          {% for i in range(9) %}
+            {% for j in range(9) %}
+              {% set v = show_solution and solved[i][j] or board[i][j] %}
+              <div class="cell
+                          {% if (i+1)%3==0 and i!=8 %} bottom-line{% endif %}
+                          {% if (j+1)%3==0 and j!=8 %} right-line{% endif %}">
+                {{ v if v else '' }}
+              </div>
+            {% endfor %}
           {% endfor %}
-        {% endfor %}
+        </div>
       </div>
-    {% endif %}
+
+      <div class="sidebar">
+        <form action="/solve" method="POST">
+          <button type="submit">Resolver&nbsp;Sudoku</button>
+        </form>
+
+        {% if alt_solutions|default(0) > 1 %}
+        <form action="/next_solution" method="GET">
+          <button type="submit">
+            Mostrar&nbsp;outra&nbsp;solução&nbsp;({{ solution_idx + 1 }}/{{ alt_solutions }})
+          </button>
+        </form>
+        {% endif %}
+
+        <form action="/generate" method="POST">
+          <input type="hidden" name="difficulty" value="{{ difficulty or 'medium' }}">
+          <button type="submit">Gerar&nbsp;outro&nbsp;Sudoku</button>
+        </form>
+
+        <form action="/reset" method="GET">
+          <button type="submit">Voltar&nbsp;à&nbsp;Página&nbsp;Inicial</button>
+        </form>
+
+        {% if attempts is not none or runtime_ms is not none %}
+          <div class="stats">
+            {% if attempts is not none %}
+              <p><strong>Tentativas:</strong> {{ attempts }}</p>
+            {% endif %}
+            {% if runtime_ms is not none %}
+              <p><strong>Tempo de busca:</strong> {{ runtime_ms }}&nbsp;ms</p>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
   </div>
 </body>
 </html>
